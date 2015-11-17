@@ -3,10 +3,10 @@ Front-end tool to set arguments for arduino-like compiler.
 
 ####TODO list
 - [x] command-line interface
-- [x] all arguments are optional and configurable from GUI
-- [x] search for serial ports on Windows platform
+- [x] all arguments are optional and configurable from the GUI
+- [x] discover the serial ports on Windows
 - [ ] full Linux platform support
-- [ ] search for serial ports on Linux platform
+- [ ] discover the serial ports on Linux
 - [ ] default settings saved to/loaded from a file
 - [ ] full arduino command-line interface support
 - [ ] select list for board specifications
@@ -17,7 +17,7 @@ Front-end tool to set arguments for arduino-like compiler.
 ##ARDU-SETUP-TOOL
 
 ###NAME
-ardu-setup-tool - Front-end tool to set arguments for arduino-like compiler.
+ardu-setup-tool - Front-end tool to set arguments for an arduino-like compiler.
 
 ###SYNOPSIS
 *ardu-setup-tool.py*
@@ -26,22 +26,22 @@ ardu-setup-tool - Front-end tool to set arguments for arduino-like compiler.
 
 ###DESCRIPTION
 
-The *ardu-setup-tool* is a front-end for Arduino CLI and allows setup mutable arguments before compile or upload the program board.
+The *ardu-setup-tool* is a front-end for the Arduino command-line interface (CLI) and allows setup mutable arguments before compile or upload to the development board.
 
-The main purpose of this tool is the direct compilation and uploading of arduino projects in an integrated development environment that allows the execution of commands.
+The main purpose of this tool is the direct compilation and uploading of an arduino projects in an integrated development environment (IDE) that allows the execution of commands.
 
 ###ACTIONS
 
 *--verify*::
-	Build the sketch
+	Build the program
 
 *--upload*::
-	Build and upload the sketch
+	Build and upload the program
 
 ###OPTIONS
 
 *--arduino* __arduinopath__::
-	Path to arduino executable
+	Path to the arduino executable
 	
 *--board* __package__:__arch__:__board__[:__parameters__]::
 	Identification of the development board / CPU
@@ -50,4 +50,4 @@ The main purpose of this tool is the direct compilation and uploading of arduino
 	Serial port to perform upload of the program
 	
 *--file* __filename__::
-	Source code file name
+	File name of the source code
