@@ -350,15 +350,16 @@ Example:	 arduino:avr:nano:cpu=atmega168
 	def doAction(self):
 		result = 3
 		if (self.errorPath or self.errorBoard or self.errorPort or self.errorFile): return
-		command = ""
+		command = "\""
 		command += self.vPath.get()
-		command += " " + self.vAction.get()
+		command += "\" " + self.vAction.get()
 		command += " --board " + self.vBoard.get()
 		command += " --port " + self.vPort.get()
 		command += " --verbose"
-		command += " " + self.vFile.get()
+		command += " \"" + self.vFile.get()
+		command += "\""
 		print "command:", command
-		result = subprocess.call(arduinoCommand, shell=True)
+		result = subprocess.call(command, shell=True)
 		
 		if (result == 0):
 			print "{}: Success.".format(self.vPath.get())
