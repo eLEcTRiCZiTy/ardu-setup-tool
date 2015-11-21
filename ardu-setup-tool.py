@@ -338,18 +338,28 @@ Example:	 arduino:avr:nano:cpu=atmega168
 	def doContinue(self):
 		if self.enablePath:
 			self.validatePath(self.vPath.get())
+		else:
+			self.errorPath = False
 		if self.enableBoard:
 			self.validateBoard(self.vBoard.get())
+		else:
+			self.errorBoard = False
 		if self.enableFile:
 			self.validateFile(self.vFile.get())
+		else:
+			self.errorFile = False
 		if self.enablePort and system() != WINDOWS:
 			print self.vPort.get()
 			self.validatePort(self.vPort.get())
+		else:
+			self.errorPort = False
 		self.doAction()
 		
 	def doAction(self):
 		result = 3
-		if (self.errorPath or self.errorBoard or self.errorPort or self.errorFile): return
+		if (self.errorPath or self.errorBoard or self.errorPort or self.errorFile):
+			print "something missing"
+			return
 		command = "\""
 		command += self.vPath.get()
 		command += "\" " + self.vAction.get()
@@ -359,21 +369,14 @@ Example:	 arduino:avr:nano:cpu=atmega168
 		command += " \"" + self.vFile.get()
 		command += "\""
 		print "command:", command
-		result = subprocess.call(command, shell=True)
-		
-		if (result == 0):
-			print "{}: Success.".format(self.vPath.get())
-			quit(0)
-		elif (result == 1):
-			print "{}: Build failed or upload failed".format(self.vPath.get())
-			quit(1)
-		elif (result == 2):
-			print "{}: Sketch not found".format(self.vPath.get())
-			quit(2)
-		elif (result == 3):
-			print "{}: Invalid (argument for) commandline option".format(self.vPath.get())
-			quit(3)
-		
+		print "Please wait ..."
+		sys.stdout.flush()
+		self.master.destroy()
+		p = subprocess.Popen(command ,stdout = subprocess.PIPE, stderr= subprocess.PIPE)
+		output,error = p.communicate()
+		print output
+		result = p.returncode
+
 if __name__ == "__main__":
 	#ARGUMENT PARSER
 	parser = argparse.ArgumentParser(description="Setup Tool")
